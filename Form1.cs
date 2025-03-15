@@ -11,7 +11,10 @@ namespace PlacaDeCarro
         {
             if (!ValidaPlaca(txtPlaca.Text))
                 MessageBox.Show("Placa Inválida");
-            MessageBox.Show("Placa Registrada");
+            else
+            {
+                MessageBox.Show("Placa Registrada");
+            }
         }
 
         private bool ValidaPlaca(string placa)
@@ -27,7 +30,7 @@ namespace PlacaDeCarro
                 string inicioDaPlaca = placa.Substring(0, posicaodotraco);
                 string restanteDaPlaca = placa.Substring(posicaodotraco + 1);
 
-                if (inicioDaPlaca.Length == 3 && !inicioDaPlaca.All(char.IsDigit) && restanteDaPlaca.Length == 4 && restanteDaPlaca.All(char.IsDigit))
+                if (inicioDaPlaca.Length == 3 && !inicioDaPlaca.All(char.IsDigit) && inicioDaPlaca.All(char.IsUpper) && restanteDaPlaca.Length == 4 && restanteDaPlaca.All(char.IsDigit))
                 {
                     return true;
                 }
