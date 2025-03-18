@@ -9,17 +9,19 @@ namespace PlacaDeCarro
 
         private void btnValidar_Click(object sender, EventArgs e)
         {
-            if (!ValidaPlaca(txtPlaca.Text))
-                MessageBox.Show("Placa Inválida");
+            string placa = txtPlaca.Text.ToUpper();
+
+            if (!ValidaPlaca(placa))
+                MessageBox.Show("Placa Inválida", "Placa", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
             {
-                MessageBox.Show("Placa Registrada");
+                MessageBox.Show($"{placa}\nPlaca Registrada", "Placa", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
         private bool ValidaPlaca(string placa)
         {
-            // Essa placa tem que ser validada : LLL-9999
+
             if (!placa.Contains("-") || !(placa.Length == 8))
                 return false;
 
@@ -30,7 +32,7 @@ namespace PlacaDeCarro
                 string inicioDaPlaca = placa.Substring(0, posicaodotraco);
                 string restanteDaPlaca = placa.Substring(posicaodotraco + 1);
 
-                if (inicioDaPlaca.Length == 3 && !inicioDaPlaca.All(char.IsDigit) && inicioDaPlaca.All(char.IsUpper) && restanteDaPlaca.Length == 4 && restanteDaPlaca.All(char.IsDigit))
+                if (inicioDaPlaca.Length == 3 && inicioDaPlaca.All(char.IsLetter) && restanteDaPlaca.Length == 4 && restanteDaPlaca.All(char.IsDigit))
                 {
                     return true;
                 }
